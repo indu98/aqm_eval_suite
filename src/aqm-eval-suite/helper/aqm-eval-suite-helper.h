@@ -61,6 +61,13 @@ public:
   void addAQM (std::string aqm);
 
   /**
+   * \brief Removes the AQM from m_AQM list
+   *
+   * \param aqm TypeID of the AQM algorithm
+   */
+  void removeAQM (std::string aqm);
+ 
+  /**
    * \brief Helper to disconnect trace sources
    *
    * \param et The EvaluationTopology for which trace sources are disconnected
