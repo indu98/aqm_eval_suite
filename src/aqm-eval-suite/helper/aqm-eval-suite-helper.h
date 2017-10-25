@@ -65,7 +65,7 @@ public:
    *
    * \param aqm TypeID of the AQM algorithm
    */
-  void removeAQM (std::string aqm);
+  void RemoveAqm (std::string aqm);
  
   /**
    * \brief Helper to disconnect trace sources

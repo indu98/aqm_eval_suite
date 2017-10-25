@@ -50,9 +50,9 @@ ScenarioImpl::addAQM (std::string aqm)
 }
 
 void
-ScenarioImpl::removeAQM (std::string aqm)
+ScenarioImpl::RemoveAqm (std::string aqm)
 {
-  m_AQM.erase(std::remove(m_AQM.begin(), m_AQM.end(), aqm), m_AQM.end());
+  m_AQM.erase (std::remove (m_AQM.begin (), m_AQM.end (), aqm), m_AQM.end ());
   m_nAQM--;
 }
 
