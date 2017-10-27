@@ -45,6 +45,7 @@ EvaluationTopology::EvaluationTopology (std::string ScenarioName, uint32_t numFl
   m_numFlows = numFlows;
   m_flowsAdded = 0;
   m_packetSize = pktSize;
+  bool bql = true;
 
   InternetStackHelper stack;
   m_dumbbell.InstallStack (stack);
@@ -54,6 +55,11 @@ EvaluationTopology::EvaluationTopology (std::string ScenarioName, uint32_t numFl
                                   Ipv4AddressHelper ("10.10.1.0", "255.255.255.0"),
                                   Ipv4AddressHelper ("10.100.1.0", "255.255.255.0"));
   tch.Uninstall (m_dumbbell.GetLeft ()->GetDevice (0));
+  
+  if (bql)
+    {
+      tch.SetQueueLimits ("ns3::DynamicQueueLimits");
+    }
 
   m_currentAQM = queueDisc;
   if (queueDisc == "ns3::AdaptiveRedQueueDisc" || queueDisc == "ns3::FengAdaptiveRedQueueDisc" || queueDisc == "ns3::NonLinearRedQueueDisc")
