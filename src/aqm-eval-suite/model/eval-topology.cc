@@ -45,7 +45,7 @@ EvaluationTopology::EvaluationTopology (std::string ScenarioName, uint32_t numFl
   m_numFlows = numFlows;
   m_flowsAdded = 0;
   m_packetSize = pktSize;
-  bool bql = true;
+  bool m_isBql = false;
 
   InternetStackHelper stack;
   m_dumbbell.InstallStack (stack);
@@ -56,7 +56,7 @@ EvaluationTopology::EvaluationTopology (std::string ScenarioName, uint32_t numFl
                                   Ipv4AddressHelper ("10.100.1.0", "255.255.255.0"));
   tch.Uninstall (m_dumbbell.GetLeft ()->GetDevice (0));
   
-  if (bql)
+  if (m_isBql)
     {
       tch.SetQueueLimits ("ns3::DynamicQueueLimits");
     }
