@@ -39,13 +39,13 @@ EvaluationTopology::GetTypeId (void)
 }
 
 EvaluationTopology::EvaluationTopology (std::string ScenarioName, uint32_t numFlows,
-                                        PointToPointHelper p2pHelper, std::string queueDisc, uint32_t pktSize)
+                                        PointToPointHelper p2pHelper, std::string queueDisc, uint32_t pktSize, bool isBql)
   : m_dumbbell (numFlows, p2pHelper, numFlows, p2pHelper, p2pHelper)
 {
   m_numFlows = numFlows;
   m_flowsAdded = 0;
   m_packetSize = pktSize;
-  bool m_isBql = false;
+  bool m_isBql = isBql;
 
   InternetStackHelper stack;
   m_dumbbell.InstallStack (stack);
