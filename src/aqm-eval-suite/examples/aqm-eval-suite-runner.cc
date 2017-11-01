@@ -44,6 +44,11 @@ uint32_t nAQM = 7;
 std::string AggressiveTcp = "";
 std::string QueueDiscMode = "QUEUE_DISC_MODE_PACKETS";
 
+void RemoveAqm (std::string aqm)
+{
+  AQM.erase (std::remove (AQM.begin (), AQM.end (), aqm), AQM.end ());	
+}
+
 void RunOneScenario (std::string scenarioName)
 {
   mkdir ((std::string ("aqm-eval-output/") + scenarioName).c_str (), 0700);
@@ -72,7 +77,7 @@ void RunOneScenario (std::string scenarioName)
   for (uint32_t i = 0; i < nAQM; i++)
     {
       std::string proQdelThr = std::string ("python src/aqm-eval-suite/utils/generate-ellipseinput.py ") + scenarioName + " " + AQM[i] + queueDisc;
-      std::string proEllipse = std::string ("python src/aqm-eval-suite/utils/ellipsemaker ") + scenarioName + " " + AQM[i] + queueDisc;
+      std::string proEllipse = std::string ("python src/aqm-eval-suite/utils/ellipsemaker ") + scenarioName + " " + AQM[i] + queueDisc + " " + std::to_string (i+1);
       std::string plotGoodput = std::string ("python src/aqm-eval-suite/utils/goodput_process.py ") + scenarioName + " " + AQM[i] + queueDisc;
       std::string plotDelay = std::string ("python src/aqm-eval-suite/utils/delay_process.py ") + scenarioName + " " + AQM[i] + queueDisc;
       system (proQdelThr.c_str ());
@@ -129,7 +134,7 @@ void RunRttFairness (std::string scenarioName)
       for (uint32_t i = 0; i < nAQM; i++)
         {
           std::string proQdelThr = std::string ("python src/aqm-eval-suite/utils/generate-ellipseinput.py ") + scenarioName + " " + AQM[i] + queueDisc;
-          std::string proEllipse = std::string ("python src/aqm-eval-suite/utils/ellipsemaker ") + scenarioName + " " + AQM[i] + queueDisc;
+          std::string proEllipse = std::string ("python src/aqm-eval-suite/utils/ellipsemaker ") + scenarioName + " " + AQM[i] + queueDisc + " " + std::to_string (i+1);
           std::string plotGoodput = std::string ("python src/aqm-eval-suite/utils/goodput_process.py ") + scenarioName + " " + AQM[i] + queueDisc;
           std::string plotDelay = std::string ("python src/aqm-eval-suite/utils/delay_process.py ") + scenarioName + " " + AQM[i] + queueDisc;
           std::string plotDrop = std::string ("python src/aqm-eval-suite/utils/drop_process.py ") + scenarioName + " " + AQM[i] + queueDisc;
@@ -178,6 +183,8 @@ int main (int argc, char *argv[])
 
   std::string scenarioName = "";
   std::string scenarioNumber = "";
+  
+  //RemoveAqm ("CoDel");
 
   CommandLine cmd;
   cmd.AddValue ("number", "Scenario number from RFC", scenarioNumber);
