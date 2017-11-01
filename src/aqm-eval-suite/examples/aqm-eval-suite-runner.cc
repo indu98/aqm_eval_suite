@@ -25,6 +25,7 @@
 #include <map>
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include "ns3/core-module.h"
 #include <sys/stat.h>
 
