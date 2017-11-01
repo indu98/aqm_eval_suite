@@ -48,6 +48,7 @@ std::string QueueDiscMode = "QUEUE_DISC_MODE_PACKETS";
 void RemoveAqm (std::string aqm)
 {
   AQM.erase (std::remove (AQM.begin (), AQM.end (), aqm), AQM.end ());	
+  nAQM--;
 }
 
 void RunOneScenario (std::string scenarioName)
