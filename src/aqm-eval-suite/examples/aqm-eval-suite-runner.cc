@@ -44,11 +44,17 @@ std::string queueDisc = "QueueDisc";
 uint32_t nAQM = 7;
 std::string AggressiveTcp = "";
 std::string QueueDiscMode = "QUEUE_DISC_MODE_PACKETS";
+std::string isBql = ""; 
 
 void RemoveAqm (std::string aqm)
 {
+<<<<<<< HEAD
+  AQM.erase (std::remove (AQM.begin (), AQM.end (), aqm), AQM.end ());
+  nAQM--;	
+=======
   AQM.erase (std::remove (AQM.begin (), AQM.end (), aqm), AQM.end ());	
   nAQM--;
+>>>>>>> 77f66246d23f4260ef39d131a7276bb3a6bd2009
 }
 
 void RunOneScenario (std::string scenarioName)
@@ -59,11 +65,11 @@ void RunOneScenario (std::string scenarioName)
   std::string commandToRun;
   if (AggressiveTcp != "" && scenarioName == "AggressiveTransportSender")
     {
-      commandToRun = std::string ("./waf --run \"") + scenarioName + std::string (" --TcpVariant=ns3::") + AggressiveTcp + std::string (" --QueueDiscMode=") + QueueDiscMode + std::string ("\"");
+      commandToRun = std::string ("./waf --run \"") + scenarioName + std::string (" --TcpVariant=ns3::") + AggressiveTcp + std::string (" --QueueDiscMode=") + QueueDiscMode + std::string (" --isBql=") + isBql + std::string ("\"");
     }
   else
     {
-      commandToRun = std::string ("./waf --run \"") + scenarioName + std::string (" --QueueDiscMode=") + QueueDiscMode + std::string ("\"");
+      commandToRun = std::string ("./waf --run \"") + scenarioName + std::string (" --QueueDiscMode=") + QueueDiscMode + std::string (" --isBql=") + isBql + std::string ("\"");
     }
   system (commandToRun.c_str ());
   std::ofstream outfile;
@@ -116,7 +122,7 @@ void RunRttFairness (std::string scenarioName)
       mkdir ((std::string ("aqm-eval-output/") + scenarioName + std::string ("/data")).c_str (), 0700);
       mkdir ((std::string ("aqm-eval-output/") + scenarioName + std::string ("/graph")).c_str (), 0700);
     }
-  std::string commandToRun = std::string ("./waf --run \"RttFairness") + std::string (" --QueueDiscMode=") + QueueDiscMode + std::string ("\"");
+  std::string commandToRun = std::string ("./waf --run \"RttFairness") + std::string (" --QueueDiscMode=") + QueueDiscMode + std::string (" --isBql=") + isBql + std::string ("\"");
   system (commandToRun.c_str ());
   for (uint32_t i = 1; i <= 15; i++)
     {
@@ -191,6 +197,7 @@ int main (int argc, char *argv[])
   cmd.AddValue ("name", "Name of the scenario (eg: TCPFriendlySameInitCwnd)", scenarioName);
   cmd.AddValue ("AggressiveTcp", "Variant of the Aggressive TCP", AggressiveTcp);
   cmd.AddValue ("QueueDiscMode", "Determines the unit for QueueLimit", QueueDiscMode);
+  cmd.AddValue ("isBql", "Enables/Disables Byte Queue Limits", isBql);
 
   cmd.Parse (argc, argv);
 
