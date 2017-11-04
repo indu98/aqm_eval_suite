@@ -44,7 +44,7 @@ std::string queueDisc = "QueueDisc";
 uint32_t nAQM = 7;
 std::string AggressiveTcp = "";
 std::string QueueDiscMode = "QUEUE_DISC_MODE_PACKETS";
-std::string isBql = ""; 
+std::string isBql = "false"; 
 
 void RemoveAqm (std::string aqm)
 {
