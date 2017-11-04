@@ -48,13 +48,8 @@ std::string isBql = "";
 
 void RemoveAqm (std::string aqm)
 {
-<<<<<<< HEAD
   AQM.erase (std::remove (AQM.begin (), AQM.end (), aqm), AQM.end ());
   nAQM--;	
-=======
-  AQM.erase (std::remove (AQM.begin (), AQM.end (), aqm), AQM.end ());	
-  nAQM--;
->>>>>>> 77f66246d23f4260ef39d131a7276bb3a6bd2009
 }
 
 void RunOneScenario (std::string scenarioName)
